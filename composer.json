@@ -41,8 +41,8 @@
         "lint:staged": "grumphp run --ansi"
     },
     "require": {
-        "laravel/framework": "^8.0",
-        "illuminate/support": "^8.0"
+        "laravel/framework": "^8.0|^9.0",
+        "illuminate/support": "^8.0|^9.0"
     },
     "require-dev": {
         "phpmd/phpmd": "^2.8",
