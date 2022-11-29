@@ -4,6 +4,7 @@ namespace M2S\LaravelNuxt\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use M2S\LaravelNuxt\Exceptions\InvalidConfigurationException;
 
 class NuxtController
@@ -30,8 +31,14 @@ class NuxtController
         $source = config('nuxt.source', public_path('spa.html'));
 
         // If SSR is set to true try to request the path from source URL
-        if (config('nuxt.ssr', false) && $this->checkSsrSource($source)) {
-            return file_get_contents(rtrim($source, '/').$request->getRequestUri());
+        if (config('nuxt.ssr', false)/* && $this->checkSsrSource($source)*/) {
+            if (Str::endsWith($request->getRequestUri(), '/')) {
+                $path = $request->getRequestUri().'index.html';
+            } else {
+                $path = $request->getRequestUri().'/index.html';
+            }
+
+            return file_get_contents(resource_path('nuxt-pages'.$path));
         }
 
         // Return static path resource (URL or file path)

@@ -9,11 +9,11 @@ class InvalidConfigurationException extends \Exception
     /**
      * Report the exception.
      *
-     * @return void
+     * @return bool|null
      */
     public function report()
     {
-        report($this);
+        return false;
     }
 
     /**
