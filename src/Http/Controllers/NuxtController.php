@@ -38,9 +38,9 @@ class NuxtController
                 $path = $request->getPathInfo().'/index.html';
             }
 
-            if (!file_exists(resource_path('nuxt-pages'.$path))) abort(404);
+            if (!file_exists(storage_path('framework/nuxt-pages'.$path))) abort(404);
 
-            return file_get_contents(resource_path('nuxt-pages'.$path));
+            return file_get_contents(storage_path('framework/nuxt-pages'.$path));
         }
 
         // Return static path resource (URL or file path)
