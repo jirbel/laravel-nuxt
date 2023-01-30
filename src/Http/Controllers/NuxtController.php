@@ -33,14 +33,14 @@ class NuxtController
         // If SSR is set to true try to request the path from source URL
         if (config('nuxt.ssr', false)/* && $this->checkSsrSource($source)*/) {
             if (Str::endsWith($request->getPathInfo(), '/')) {
-                $path = $request->getPathInfo().'index.html';
+                $path = $request->getPathInfo() . 'index.html';
             } else {
-                $path = $request->getPathInfo().'/index.html';
+                $path = $request->getPathInfo() . '/index.html';
             }
 
-            if (!file_exists(storage_path('framework/nuxt-pages'.$path))) abort(404);
-
-            return file_get_contents(storage_path('framework/nuxt-pages'.$path));
+            if (file_exists(storage_path('framework/nuxt-pages' . $path))) {
+                return file_get_contents(storage_path('framework/nuxt-pages' . $path));
+            }
         }
 
         // Return static path resource (URL or file path)
